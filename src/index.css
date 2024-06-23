@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#btn{
+    transition: all 0.3s;
+    box-shadow: 6px 6px 12px #8d8b8b, -6px -6px 12px #EEE2DE;
+}
+#btn:active {
+    color: #666;
+    box-shadow: inset 4px 4px 12px #EEE2DE, inset -4px -4px 12px #ce4d2f;
+  }

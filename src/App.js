@@ -1,13 +1,20 @@
 import React from "react";
-import Header from "./Components/Header";
-import Herosection from "./Components/Herosection";
+import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
+import Home from "./Components/Home";
+import Startupstories from "./Components/Startupstories";
+import Startuppodcast from "./Components/Startuppodcast";
+import Startuptalk from "./Components/Startuptalk";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Herosection/>
-    </div>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Home/>} />
+          <Route path="/startupstories" element={<Startupstories/>} />
+          <Route path="/startuppodcast" element={<Startuppodcast/>} />
+          <Route path="/startuptalk" element={<Startuptalk/>} />
+        </Routes>
+      </Router>
   );
 }
 
