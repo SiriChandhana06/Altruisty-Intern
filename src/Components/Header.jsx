@@ -1,39 +1,138 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, User } from "firebase/auth";
+import { app } from '../Components/Firebaseauth';
 
 const Header = () => {
+  const [user, setUser] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const auth = getAuth(app);
+  const dropdownRef = useRef(null);
+
+  const signInWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      setUser(result.user);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Error occurred during sign-in:", error.message);
+      }
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Error occurred during sign-out:", error.message);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user); // Set user state if user is authenticated
+      } else {
+        setUser(null); // Reset user state if no user is authenticated
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup function to unsubscribe from auth state changes
+  }, [auth]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false); // Close dropdown if clicked outside
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div>
-      <div>
-        <h1 className="text-4xl bg-[#032d60] text-white font-bold py-4 text-center"> StartupHub </h1>
-      </div>
-      <div className=' m-10'>
-      <div className='flex gap-6'>
-        <div className='flex gap-6'>
-          <h1 className='border-2 font-semibold rounded-full py-4 px-8 bg-[#eaf5fe]  shadow-lg shadow-gray-500/50 active:bg-[#ce4d2f] active:text-white focus:outline-none '>Home</h1>
-          <h1 className='border-2 font-semibold rounded-full py-4 px-8 bg-[#eaf5fe]  shadow-lg shadow-gray-500/50 active:bg-[#ce4d2f] active:text-white focus:outline-none '>About</h1>
-          <h1 className='border-2 font-semibold rounded-full py-4 px-8 bg-[#eaf5fe]  shadow-lg shadow-gray-500/50 active:bg-[#ce4d2f] active:text-white focus:outline-none '>Services</h1>
-          <h1 className='border-2 font-semibold rounded-full py-4 px-8 bg-[#eaf5fe]  shadow-lg shadow-gray-500/50 active:bg-[#ce4d2f] active:text-white focus:outline-none '>StartupStories</h1>
-          <h1 className='border-2 font-semibold rounded-full py-4 px-8 bg-[#eaf5fe]  shadow-lg shadow-gray-500/50 active:bg-[#ce4d2f] active:text-white focus:outline-none '>StartupPodcast</h1>
-          <h1 className='border-2 font-semibold rounded-full py-4 px-8 bg-[#eaf5fe]  shadow-lg shadow-gray-500/50 active:bg-[#ce4d2f] active:text-white focus:outline-none '>StartupTalk</h1>
+    <header className="bg-[#032d60] text-white">
+      <div className="flex justify-between items-center px-10 py-4">
+        <h1 className="text-4xl font-bold">StartupHub</h1>
+        <div className="relative">
+          {user ? (
+            <div ref={dropdownRef}>
+              <button
+                onClick={toggleMenu}
+                className="flex items-center bg-[#ce4d2f] py-2 px-4 font-semibold rounded-xl focus:outline-none"
+              >
+                <img
+                  src={user.photoURL || "/default-avatar.png"}
+                  alt="User Avatar"
+                  className="h-8 w-8 rounded-full"
+                />
+                <span className="ml-2">{user.displayName}</span>
+              </button>
+              {isOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-10">
+                  <button
+                    onClick={handleSignOut}
+                    className="block px-4 py-2 text-sm text-black hover:bg-gray-100 w-full text-left"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <button
+              className="bg-[#ce4d2f] py-2 px-4 font-semibold rounded-xl text-white focus:outline-none"
+              onClick={signInWithGoogle}
+            >
+              Login
+            </button>
+          )}
         </div>
-        <div className='flex'>
-            <input
-              className='border-y-2 border-l-2 border-black font-semibold rounded-l-xl text-xl px-4 py-2 shadow-lg shadow-gray-500/50'
-              type='search'
-              placeholder='Search Here' 
-            />
-            <svg className='bg-[#032d60] rounded-r-xl py-2 px-4 shadow-lg shadow-gray-500/50' xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="60" height="60" viewBox="0 0 50 50">
-            <g fill="#ffffff">
-              <path d="M 21 3 C 11.601563 3 4 10.601563 4 20 C 4 29.398438 11.601563 37 21 37 C 24.355469 37 27.460938 36.015625 30.09375 34.34375 L 42.375 46.625 L 46.625 42.375 L 34.5 30.28125 C 36.679688 27.421875 38 23.878906 38 20 C 38 10.601563 30.398438 3 21 3 Z M 21 7 C 28.199219 7 34 12.800781 34 20 C 34 27.199219 28.199219 33 21 33 C 13.800781 33 8 27.199219 8 20 C 8 12.800781 13.800781 7 21 7 Z"></path></g>
-            </svg>
-            </div>
-            <div>
-            <button className='bg-[#ce4d2f] py-4 px-8 font-semibold rounded-xl text-white border-1 border-[#e8e8e8]' id='btn'>Login</button>
-            </div>
-          </div>
       </div>
-    </div>
-  )
-}
+      <nav className="bg-white px-12 py-4 shadow-lg">
+        <div className="container mx-auto flex justify-between items-center">
+          <div className="flex space-x-6">
+            {['Home', 'About', 'Services', 'StartupStories', 'StartupPodcast', 'StartupTalk'].map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className="px-4 py-2 rounded-full font-semibold bg-[#eaf5fe] text-black hover:bg-[#ce4d2f] hover:text-white transition-colors"
+              >
+                {item}
+              </a>
+            ))}
+          </div>
+          <div class="search">
+        <input placeholder="Search..." type="text" />
+        <button type="submit">Go</button>
+      </div>
+          {/* <div className="flex items-center">
+            <input
+              className="border border-r-0 border-black px-4 py-2 rounded-l-xl text-xl"
+              type="search"
+              placeholder="Search Here"
+            />
+            <button className="bg-[#032d60] text-white py-2 px-4 rounded-r-xl">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M10 2C5.589 2 2 5.589 2 10s3.589 8 8 8c1.611 0 3.116-.518 4.365-1.395l5.654 5.654 1.414-1.414-5.654-5.654C17.482 13.116 18 11.611 18 10c0-4.411-3.589-8-8-8zm0 14c-3.309 0-6-2.691-6-6s2.691-6 6-6 6 2.691 6 6-2.691 6-6 6z"/>
+              </svg>
+            </button>
+          </div> */}
+        </div>
+      </nav>
+    </header>
+  );
+};
 
 export default Header;

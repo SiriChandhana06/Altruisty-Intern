@@ -1,9 +1,8 @@
 import React from 'react';
-import Illustration from '../Assests/Startup business landing page, isometric rocket.png';
 import { useNavigate } from "react-router-dom";
 
 const Herosection = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
     <div>
       {/* <div className='m-4 md:grid grid-cols-2 mt-10'>

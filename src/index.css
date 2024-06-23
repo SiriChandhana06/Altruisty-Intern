@@ -4,9 +4,44 @@
 
 #btn{
     transition: all 0.3s;
-    box-shadow: 6px 6px 12px #8d8b8b, -6px -6px 12px #EEE2DE;
+    box-shadow: 6px 6px 12px #032d60, -6px -6px 12px #032d60;
 }
 #btn:active {
     color: #666;
     box-shadow: inset 4px 4px 12px #EEE2DE, inset -4px -4px 12px #ce4d2f;
   }
+
+  .search {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .search input[type="text"] {
+    color: #666;
+    width: 300px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search button[type="submit"] {
+    background-color: #032d60;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: .9s ease;
+  }
+  
+  .search button[type="submit"]:hover {
+    transform: scale(1.1);
+    color: rgb(255, 255, 255);
+    background-color: #032d60;
+  }
+  
