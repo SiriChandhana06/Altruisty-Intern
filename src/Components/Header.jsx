@@ -117,18 +117,6 @@ const Header = () => {
         <input placeholder="Search..." type="text" />
         <button type="submit">Go</button>
       </div>
-          {/* <div className="flex items-center">
-            <input
-              className="border border-r-0 border-black px-4 py-2 rounded-l-xl text-xl"
-              type="search"
-              placeholder="Search Here"
-            />
-            <button className="bg-[#032d60] text-white py-2 px-4 rounded-r-xl">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M10 2C5.589 2 2 5.589 2 10s3.589 8 8 8c1.611 0 3.116-.518 4.365-1.395l5.654 5.654 1.414-1.414-5.654-5.654C17.482 13.116 18 11.611 18 10c0-4.411-3.589-8-8-8zm0 14c-3.309 0-6-2.691-6-6s2.691-6 6-6 6 2.691 6 6-2.691 6-6 6z"/>
-              </svg>
-            </button>
-          </div> */}
         </div>
       </nav>
     </header>
