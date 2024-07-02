@@ -103,7 +103,7 @@ const Header = () => {
       <nav className="bg-white px-12 py-4 shadow-lg">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex space-x-6">
-            {['Home', 'About', 'Services', 'StartupStories', 'StartupPodcast', 'StartupTalk'].map((item) => (
+            {['Overview', 'StartupStories', 'StartupPodcast', 'StartupTalk', 'Student Articles ','Student Contribution Stories'].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
