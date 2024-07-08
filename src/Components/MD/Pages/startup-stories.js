@@ -1,9 +1,9 @@
 // StartupStoriesPage.js
 import React, { useState, useEffect } from "react";
-import VideoSlider from "../components/VideoSlider_page";
-import startupPodcast from "../data/videoData"; // Assuming this is the correct path
-import Header from '../components/Header';
-import Navbar from '../components/Navbar';
+import VideoSlider from "../compo/VideoSlider_page";
+import startupPodcast from "../Data/videoData"; // Assuming this is the correct path
+import Header from "../../Header";
+
 
 const StartupStoriesPage = () => {
   const [categories, setCategories] = useState([]);
@@ -35,8 +35,7 @@ const StartupStoriesPage = () => {
 
   return (
     <div>
-      <Header />
-      <Navbar />
+      <Header/>
       <div className="startup-stories-page container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-5 text-center">Startup Stories</h1>
         {categories.map((category, index) => (

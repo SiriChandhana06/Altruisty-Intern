@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
-import { videos } from "../data/videoData";
-import Header from '../components/Header'
+import { videos } from "../Data/videoData";
+import Header from "../../Header";
+
 const VideoPage = () => {
   const { category, videoTitle } = useParams();
 
@@ -35,7 +36,7 @@ const VideoPage = () => {
 
   return (
      <div>
-     <Header/>
+    <Header/>
      <div className="container mx-auto p-4">
      <ReactPlayer url={currentVideo.videoUrl} controls width="100%" height={playerHeight} />
      <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2">{currentVideo.title}</h1>

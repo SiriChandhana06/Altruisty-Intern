@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import VideoSlider from "../components/VideoSlider_page"; 
-import startupPodcast from "../data/sp"; 
-import Header from '../components/Header';
-import Navbar from '../components/Navbar';
+import VideoSlider from "../compo/VideoSlider_page"; 
+import startupPodcast from "../Data/sp"; 
+import Header from "../../Header";
+
 
 
 const StartupPodcastPage = () => {
@@ -31,8 +31,7 @@ const StartupPodcastPage = () => {
 
   return (
    <div>
-   <Header />
-      <Navbar />
+   <Header/>
    <div className="startup-stories-page container mx-auto px-4 py-8">
    <h1 className="text-4xl font-bold mb-5 text-center">Startup Podcast</h1>
    {categories.map((category, index) => (

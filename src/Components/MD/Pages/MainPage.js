@@ -1,8 +1,7 @@
 import React from 'react';
-import Header from '../components/Header';
-import Navbar from '../components/Navbar';
-import VideoSlider from '../components/VideoSlider';
-import videosData from "../data/videoData"; // Assuming this file exports an array of videos
+import VideoSlider from '../compo/VideoSlider';
+import videosData from "../Data/videoData"; // Assuming this file exports an array of videos
+import Header from '../../Header';
 
 const MainPage = () => {
   // Assuming videosData is an array of video objects with category information
@@ -18,8 +17,7 @@ const MainPage = () => {
 
   return (
     <div>
-      <Header />
-      <Navbar />
+      <Header/>
       <div className="container mx-auto p-4">
         {Object.keys(groupedVideos).map(category => (
           <div key={category}>
