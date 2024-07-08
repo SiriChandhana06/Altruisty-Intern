@@ -17,7 +17,6 @@ const MainPage = () => {
 
   return (
     <div>
-      <Header/>
       <div className="container mx-auto p-4">
         {Object.keys(groupedVideos).map(category => (
           <div key={category}>
