@@ -14,4 +14,4 @@
 //   )
 // }
 
-// export default Student
+// export default Student;

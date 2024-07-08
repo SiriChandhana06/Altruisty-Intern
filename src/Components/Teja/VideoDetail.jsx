@@ -55,7 +55,7 @@ const VideoDetail = ({ videos }) => {
             Your browser does not support the video tag.
           </video>
         </div>
-        <div className="mt-4 border p-4 w-full bg-gradient-to-l from-purple-400 to-blue-400 sm:border">
+        <div className="mt-4 border p-4 w-full bg-gradient-to-t from-[#9747FF] to-white sm:border">
           <h1 className="text-xl lg:text-2xl font-bold">{video.title}</h1>
           <p className="mt-2 font-semibold text-lg lg:text-xl">{video.description}</p>
           <h4 className='text-lg lg:text-xl font-normal pt-6 pb-4'>
