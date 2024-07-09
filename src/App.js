@@ -29,7 +29,7 @@ function App() {
             <VideoDetail videos={videos}/>
             </>}
              />
-          <Route path="/startupstories" element={
+          <Route path="/startupstories"  element={
               <>
               <Header/>
                 <StudentStoryPage videos={videos} />

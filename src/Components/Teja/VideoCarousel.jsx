@@ -41,37 +41,13 @@ const VideoCarousel = ({ videos }) => {
           </div>
         ))}
       </Slider>
-      <style jsx>{`
-        .slick-prev, .slick-next {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          z-index: 1;
-         background-color: rgba(0, 0, 0, 0.5);
-          color: white;
-          border: none;
-          padding: 10px;
-          cursor: pointer;
-        }
-
-        .slick-prev {
-          left: 0;
-        }
-
-        .slick-next {
-          right: 0;
-        }
-
-        .slick-prev:before, .slick-next:before {
-          display: none; /* Hide the default arrow content */
-        }
-      `}</style>
-      <button className="slick-prev" onClick={() => sliderRef.current.slickPrev()}>
+      
+      {/* <button className="slick-prev" onClick={() => sliderRef.current.slickPrev()}>
         {"<"}
       </button>
       <button className="slick-next" onClick={() => sliderRef.current.slickNext()}>
         {">"}
-      </button>
+      </button> */}
     </div>
   );
 }
