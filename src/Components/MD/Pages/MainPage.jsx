@@ -16,7 +16,7 @@ import Section from '../compo/Section';
     return (
       <div>
   
-        <h1 className='flex justify-center font-bold text-4xl pt-6 pb-2 border-[#eeeeee] border-b-2 mx-10 shadow-lg' >Startup Hub</h1>
+
                  <div className='mx-20'>
                  <Section title="Startup Stories" videos={videos} />
                   <Section title="Startup Talk" videos={videos} />
