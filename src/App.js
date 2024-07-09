@@ -26,13 +26,13 @@ function App() {
           <Route path="/video/:id" element={
             <>
             <Header/>
-            <VideoDetail videos={videos} />
+            <VideoDetail videos={videos}/>
             </>}
              />
           <Route path="/startupstories" element={
               <>
               <Header/>
-                <StudentStoryPage videos={videos}/>
+                <StudentStoryPage videos={videos} />
                 <StudentContributionPage videos={videos} />
               </>
             } />

@@ -7,7 +7,7 @@ const VideoSlider = ({ videos, category }) => {
   return (
     <div className="my-2">
       {category && <h2 className="text-2xl font-bold mb-4">{category}</h2>}
-      <div className="flex overflow-x-auto space-x-4 no-scrollbar">
+      <div id="hide-scrollbar" className="flex overflow-x-auto space-x-4 no-scrollbar">
         {filteredVideos.map((video) => (
           <div
             key={video.title}

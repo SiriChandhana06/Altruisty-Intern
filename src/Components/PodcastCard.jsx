@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useWindowSize from './Windowsize';
 
 // Example video data
 const videos = [
@@ -13,7 +14,7 @@ const videos = [
 ];
 
 const VideoCard = ({ video }) => (
-  <div className="p-4 flex-shrink-0 ">
+  <div className="p-4 flex-shrink-0">
     <video controls className="w-48 h-48 object-cover rounded-lg">
       <source src={video.src} type="video/mp4" />
       Your browser does not support the video tag.
@@ -24,11 +25,13 @@ const VideoCard = ({ video }) => (
 
 const VideoSection = ({ title, videos }) => {
   const [showMore, setShowMore] = useState(false);
+  const size = useWindowSize();
+  const isMobile = size.width <= 768;
 
-  const displayedVideos = showMore ? videos : videos.slice(0, 2);
+  const displayedVideos = showMore ? videos : videos.slice(0, isMobile ? 1 : 2);
 
   return (
-    <div className="bg-gradient-to-tr from-[#9747FF] to-white p-6 rounded-xl shadow-lg shadow-[#9747FF] flex gap-6">
+    <div className="bg-gradient-to-tr from-[#9747FF] to-white p-6 rounded-xl shadow-lg shadow-[#9747FF] flex flex-col lg:flex-row gap-6">
       <div className="flex flex-col gap-4">
         <h2 className="text-2xl font-bold text-center">{title}</h2>
         <div className={`flex gap-4 ${showMore ? 'overflow-x-auto hide-scrollbar scroll-smooth' : ''}`}>
@@ -37,7 +40,7 @@ const VideoSection = ({ title, videos }) => {
           ))}
         </div>
       </div>
-      <div className="mt-28 text-center w-80 ">
+      <div className="mt-4 lg:mt-28 text-center w-full lg:w-80">
         <button
           className="px-6 py-2 border-2 border-black bg-white text-black font-semibold rounded-full shadow-md hover:bg-[#9747FF] hover:text-white transition-colors"
           onClick={() => setShowMore(!showMore)}
@@ -51,12 +54,14 @@ const VideoSection = ({ title, videos }) => {
 
 const VideosSection = ({ title, videos }) => {
   const [showMore, setShowMore] = useState(false);
+  const size = useWindowSize();
+  const isMobile = size.width <= 768;
 
-  const displayedVideos = showMore ? videos : videos.slice(0, 2);
+  const displayedVideos = showMore ? videos : videos.slice(0, isMobile ? 1 : 2);
 
   return (
-    <div className="bg-gradient-to-tl from-[#9747FF] to-white p-8 rounded-xl shadow-lg shadow-[#9747FF] flex">
-        <div className="mt-28 text-center w-64">
+    <div className="bg-gradient-to-tl from-[#9747FF] to-white p-8 rounded-xl shadow-lg shadow-[#9747FF] flex flex-col lg:flex-row">
+      <div className="mt-4 lg:mt-28 text-center w-full lg:w-64">
         <button
           className="px-6 py-2 border-2 border-black bg-white text-black font-semibold rounded-full shadow-md hover:bg-purple-500 hover:text-white transition-colors"
           onClick={() => setShowMore(!showMore)}
@@ -71,7 +76,6 @@ const VideosSection = ({ title, videos }) => {
           ))}
         </div>
       </div>
-      
     </div>
   );
 };
@@ -82,29 +86,29 @@ const PodcastCard = () => (
       <div className="text-center mb-8">
         <h2 className="text-4xl font-bold">Startup Podcasts</h2>
       </div>
-      <div className="max-w-6xl mx-12">
-        <div className="flex gap-6 pb-10">
+      <div className="max-w-6xl mx-auto px-4 lg:px-12">
+        <div className="flex flex-col lg:flex-row gap-6 pb-10">
           <div className="py-4">
             <VideoSection videos={videos} />
           </div>
-          <div className="w-96">
-            <h1 className="text-2xl font-bold text-center mt-40">Making a Difference</h1>
+          <div className="w-full lg:w-96">
+            <h1 className="text-2xl font-bold text-center mt-4 lg:mt-40">Making a Difference</h1>
           </div>
         </div>
-        <div className="flex gap-6 pb-10">
-          <div className="w-96">
-            <h1 className="text-2xl font-bold text-center mt-40">Building a Dream Team</h1>
+        <div className=" flex flex-col lg:flex-row gap-6 pb-10">
+          <div className="w-full lg:w-96">
+            <h1 className="text-2xl font-bold text-center mt-4 lg:mt-40">Building a Dream Team</h1>
           </div>
           <div className="py-4">
-            <VideosSection videos={videos} />
+            <VideosSection  videos={videos} />
           </div>
         </div>
-        <div className="flex gap-6 pb-10">
+        <div className="flex flex-col lg:flex-row gap-6 pb-10">
           <div className="py-4">
-            <VideoSection videos={videos} />
+            <VideoSection  videos={videos} />
           </div>
-          <div className="w-96">
-            <h1 className="text-2xl font-bold text-center mt-40">Against All Odds</h1>
+          <div className="w-full lg:w-96">
+            <h1 className="text-2xl font-bold text-center mt-4 lg:mt-40">Against All Odds</h1>
           </div>
         </div>
       </div>
