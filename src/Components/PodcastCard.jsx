@@ -86,7 +86,7 @@ const PodcastCard = () => (
       <div className="text-center mb-8">
         <h2 className="text-4xl font-bold">Startup Podcasts</h2>
       </div>
-      <div className="max-w-6xl mx-auto px-4 lg:px-12">
+      <div className=" mx-auto px-4 lg:px-12">
         <div className="flex flex-col lg:flex-row gap-6 pb-10">
           <div className="py-4">
             <VideoSection videos={videos} />
