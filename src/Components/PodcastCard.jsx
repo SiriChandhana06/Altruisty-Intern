@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import useWindowSize from './Windowsize';
+import { Link } from 'react-router-dom';
 
 // Example video data
-const videos = [
+const videoss = [
   { id: 1, title: 'Reiciendis tenetur', src: 'video1.mp4' },
   { id: 2, title: 'Reiciendis tenetur', src: 'video2.mp4' },
   { id: 3, title: 'Reiciendis tenetur', src: 'video3.mp4' },
@@ -13,30 +14,32 @@ const videos = [
   { id: 8, title: 'Reiciendis tenetur', src: 'video8.mp4' },
 ];
 
-const VideoCard = ({ video }) => (
+const VideoCard = ({ videoss }) => (
   <div className="p-4 flex-shrink-0">
+     <Link to={`/videos/${videoss.id}`}>
     <video controls className="w-48 h-48 object-cover rounded-lg">
-      <source src={video.src} type="video/mp4" />
+      <source src={process.env.PUBLIC_URL + '/' + videoss.src} type="video/mp4" />
       Your browser does not support the video tag.
     </video>
-    <h3 className="mt-2 text-center">{video.title}</h3>
+    <h3 className="mt-2 text-center">{videoss.title}</h3>
+    </Link>
   </div>
 );
 
-const VideoSection = ({ title, videos }) => {
+const VideoSection = ({ title, videoss }) => {
   const [showMore, setShowMore] = useState(false);
   const size = useWindowSize();
   const isMobile = size.width <= 768;
 
-  const displayedVideos = showMore ? videos : videos.slice(0, isMobile ? 1 : 2);
+  const displayedVideos = showMore ? videoss : videoss.slice(0, isMobile ? 1 : 2);
 
   return (
     <div className="bg-gradient-to-tr from-[#9747FF] to-white p-6 rounded-xl shadow-lg shadow-[#9747FF] flex flex-col lg:flex-row gap-6">
       <div className="flex flex-col gap-4">
         <h2 className="text-2xl font-bold text-center">{title}</h2>
         <div className={`flex gap-4 ${showMore ? 'overflow-x-auto hide-scrollbar scroll-smooth' : ''}`}>
-          {displayedVideos.map((video) => (
-            <VideoCard key={video.id} video={video} />
+          {displayedVideos.map((videoss) => (
+            <VideoCard key={videoss.id} videoss={videoss} />
           ))}
         </div>
       </div>
@@ -52,12 +55,12 @@ const VideoSection = ({ title, videos }) => {
   );
 };
 
-const VideosSection = ({ title, videos }) => {
+const VideosSection = ({ title, videoss }) => {
   const [showMore, setShowMore] = useState(false);
   const size = useWindowSize();
   const isMobile = size.width <= 768;
 
-  const displayedVideos = showMore ? videos : videos.slice(0, isMobile ? 1 : 2);
+  const displayedVideos = showMore ? videoss : videoss.slice(0, isMobile ? 1 : 2);
 
   return (
     <div className="bg-gradient-to-tl from-[#9747FF] to-white p-8 rounded-xl shadow-lg shadow-[#9747FF] flex flex-col lg:flex-row">
@@ -71,8 +74,8 @@ const VideosSection = ({ title, videos }) => {
       </div>
       <div className="flex flex-col gap-4">
         <div className={`flex gap-4 ${showMore ? 'overflow-x-auto hide-scrollbar scroll-smooth' : ''}`}>
-          {displayedVideos.map((video) => (
-            <VideoCard key={video.id} video={video} />
+          {displayedVideos.map((videoss) => (
+            <VideoCard key={videoss.id} videoss={videoss} />
           ))}
         </div>
       </div>
@@ -89,7 +92,7 @@ const PodcastCard = () => (
       <div className=" mx-auto px-4 lg:px-12">
         <div className="flex flex-col lg:flex-row gap-6 pb-10">
           <div className="py-4">
-            <VideoSection videos={videos} />
+            <VideoSection videoss={videoss} />
           </div>
           <div className="w-full lg:w-96">
             <h1 className="text-2xl font-bold text-center mt-4 lg:mt-40">Making a Difference</h1>
@@ -100,12 +103,12 @@ const PodcastCard = () => (
             <h1 className="text-2xl font-bold text-center mt-4 lg:mt-40">Building a Dream Team</h1>
           </div>
           <div className="py-4">
-            <VideosSection  videos={videos} />
+            <VideosSection  videoss={videoss} />
           </div>
         </div>
         <div className="flex flex-col lg:flex-row gap-6 pb-10">
           <div className="py-4">
-            <VideoSection  videos={videos} />
+            <VideoSection  videoss={videoss} />
           </div>
           <div className="w-full lg:w-96">
             <h1 className="text-2xl font-bold text-center mt-4 lg:mt-40">Against All Odds</h1>
