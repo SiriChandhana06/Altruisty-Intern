@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import Header from '../Components/Header';
 
 const videos = [
   { id: 1, title: 'Rciendis tenetur', src: 'video1.mp4', description: 'Description for video 1' },
@@ -27,8 +28,10 @@ const VideoDetails = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10">
-      <div className="max-w-4xl mx-auto p-4">
+    <div>
+      <Header/>
+    <div className=" bg-gray-100 py-10">
+      <div className="mx-16 p-4">
         <div className="flex justify-between items-center mb-4">
           <Link to="/" className="text-gray-500">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
@@ -37,21 +40,21 @@ const VideoDetails = () => {
           </Link>
         </div>
         <div className="flex mb-4">
-          <video controls className="w-2/3 h-64 object-cover rounded-lg">
+          <video controls className="w-[1000px] h-auto object-cover rounded-lg">
             <source src={process.env.PUBLIC_URL + '/' + mainVideo.src} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-          <div className="w-1/3 pl-4 ml-4 border bg-gradient-to-t from-[#9747FF] to-white sm:border ">
+          <div className="w-auto pl-4 ml-4 border bg-gradient-to-t from-[#9747FF] to-white sm:border ">
             <h1 className="text-2xl font-bold mb-4">{mainVideo.title}</h1>
-            <p className="mb-4">{mainVideo.description}</p>
+            <p className="mb-4 w-72">{mainVideo.description}</p>
           </div>
         </div>
         <h2 className="text-xl font-bold mb-4">Related Videos</h2>
-        <div className="flex space-x-4">
+        <div className="grid grid-flow-col">
           {relatedVideos.map((relatedVideo) => (
             <div key={relatedVideo.id} className="flex-1" onClick={() => updateMainVideo(relatedVideo)}>
               <Link to={`/videos/${relatedVideo.id}`}>
-                <video controls className="w-full h-32 object-cover rounded-lg">
+                <video controls className="w-auto h-32 object-cover rounded-lg">
                   <source src={process.env.PUBLIC_URL + '/' + relatedVideo.src} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
@@ -61,6 +64,7 @@ const VideoDetails = () => {
           ))}
         </div>
       </div>
+    </div>
     </div>
   );
 };
