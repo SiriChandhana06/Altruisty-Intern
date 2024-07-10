@@ -2,12 +2,12 @@ import React from "react";
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
 import Home from "./Components/Home";
 import StartupTalk from "./Components/StartupTalk";
-import StartupStories from "./Components/StartupStories";
 import StartupPodcast from "./Components/StartupPodcast";
 import StudentContributionPage from "./Components/Teja/Stdcon";
 import StudentStoryPage from './Components/Teja/Studentstry';
 import VideoDetail from './Components/Teja/VideoDetail';
 import Header from "./Components/Header";
+import VideoDetails from "./Components/Stvd";
 
 
 function App() {
@@ -18,6 +18,16 @@ function App() {
     { id: 4, src: 'video1.mp4', title: 'Sylas Frostwing', description: 'Description 4' },
     { id: 5, src: 'video1.mp4', title: 'Nova Starweaver', description: 'Description 5' },
   ];
+  const videoss = [
+  { id: 1, title: 'Reiciendis tenetur', src: 'video1.mp4', description: 'Description for video 1' },
+  { id: 2, title: 'Reiciendis tenetur', src: 'video2.mp4', description: 'Description for video 2' },
+  { id: 3, title: 'Reiciendis tenetur', src: 'video3.mp4', description: 'Description for video 3' },
+  { id: 4, title: 'Reiciendis tenetur', src: 'video4.mp4', description: 'Description for video 4' },
+  { id: 5, title: 'Reiciendis tenetur', src: 'video5.mp4', description: 'Description for video 5' },
+  { id: 6, title: 'Reiciendis tenetur', src: 'video6.mp4', description: 'Description for video 6' },
+  { id: 7, title: 'Reiciendis tenetur', src: 'video7.mp4', description: 'Description for video 7' },
+  { id: 8, title: 'Reiciendis tenetur', src: 'video8.mp4', description: 'Description for video 8' },
+];
   
   return (
       <Router>
@@ -39,6 +49,8 @@ function App() {
           {/* <Route path="/startupstories" element={<StudentStoryPage videos={videos} />} /> */}
           {/* <Route path='/startupstories' element={<StartupStories/>} /> */}
           <Route path="/startuptalk" element={<StartupTalk/>} />
+          <Route path="/videos/:id" element={
+            <VideoDetails videoss={videoss} />} />
           <Route path='/startuppodcast' element={<StartupPodcast/>} />
           {/* <Route path='/studentcontribution' element={<StudentContributionPage/>} /> */}
           <Route path="/studentcontribution" element={
