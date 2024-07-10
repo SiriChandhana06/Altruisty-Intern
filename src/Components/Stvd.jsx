@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Header from '../Components/Header';
@@ -29,42 +28,42 @@ const VideoDetails = () => {
 
   return (
     <div>
-      <Header/>
-    <div className=" bg-gray-100 py-10">
-      <div className="mx-16 p-4">
-        <div className="flex justify-between items-center mb-4">
-          <Link to="/" className="text-gray-500">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
-              <path fill="currentColor" d="m7.825 13l5.6 5.6L12 20l-8-8l8-8l1.425 1.4l-5.6 5.6H20v2z"/>
-            </svg>
-          </Link>
-        </div>
-        <div className="flex mb-4">
-          <video controls className="w-[1000px] h-auto object-cover rounded-lg">
-            <source src={process.env.PUBLIC_URL + '/' + mainVideo.src} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <div className="w-auto pl-4 ml-4 border bg-gradient-to-t from-[#9747FF] to-white sm:border ">
-            <h1 className="text-2xl font-bold mb-4">{mainVideo.title}</h1>
-            <p className="mb-4 w-72">{mainVideo.description}</p>
+      <Header />
+      <div className="bg-gray-100 py-10">
+        <div className="mx-4 md:mx-16 p-4">
+          <div className="flex justify-between items-center mb-4">
+            <Link to="/" className="text-gray-500">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
+                <path fill="currentColor" d="m7.825 13l5.6 5.6L12 20l-8-8l8-8l1.425 1.4l-5.6 5.6H20v2z"/>
+              </svg>
+            </Link>
+          </div>
+          <div className="flex flex-col lg:flex-row mb-4">
+            <video controls className="w-full lg:w-2/3 h-auto object-cover rounded-lg">
+              <source src={process.env.PUBLIC_URL + '/' + mainVideo.src} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <div className="w-full lg:w-1/3 lg:pl-4 lg:ml-4 mt-4 lg:mt-0 border bg-gradient-to-t from-[#9747FF] to-white p-4 rounded-lg">
+              <h1 className="text-2xl font-bold mb-4">{mainVideo.title}</h1>
+              <p className="mb-4">{mainVideo.description}</p>
+            </div>
+          </div>
+          <h2 className="text-xl font-bold mb-4">Related Videos</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {relatedVideos.map((relatedVideo) => (
+              <div key={relatedVideo.id} className="flex-1 cursor-pointer" onClick={() => updateMainVideo(relatedVideo)}>
+                <Link to={`/videos/${relatedVideo.id}`}>
+                  <video controls className="w-full h-32 object-cover rounded-lg">
+                    <source src={process.env.PUBLIC_URL + '/' + relatedVideo.src} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  <h3 className="mt-2 text-center">{relatedVideo.title}</h3>
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
-        <h2 className="text-xl font-bold mb-4">Related Videos</h2>
-        <div className="grid grid-flow-col">
-          {relatedVideos.map((relatedVideo) => (
-            <div key={relatedVideo.id} className="flex-1" onClick={() => updateMainVideo(relatedVideo)}>
-              <Link to={`/videos/${relatedVideo.id}`}>
-                <video controls className="w-auto h-32 object-cover rounded-lg">
-                  <source src={process.env.PUBLIC_URL + '/' + relatedVideo.src} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-                <h3 className="mt-2 text-center">{relatedVideo.title}</h3>
-              </Link>
-            </div>
-          ))}
-        </div>
       </div>
-    </div>
     </div>
   );
 };
