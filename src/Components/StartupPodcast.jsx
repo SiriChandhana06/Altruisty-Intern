@@ -15,4 +15,4 @@ const StartupPodcast = () => {
   )
 }
 
-export default StartupPodcast
+export default StartupPodcast;
