@@ -1,12 +1,42 @@
 import React from 'react';
+import {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-const VideoDetail = ({ videos }) => {
-  const { id } = useParams();
-  const video = videos.find(v => v.id === parseInt(id));
+const VideoDetail = ({ searchQuery }) => {
 
-  if (!video) {
+  const videos = [
+    { id: 1, src: 'video1.mp4', title: 'Aetherius Vael', description: 'Description 1' },
+    { id: 2, src: 'video1.mp4', title: 'Seraphina Drakewind', description: 'Description 2' },
+    { id: 3, src: 'video1.mp4', title: 'Lyra Nightshade', description: 'Description 3' },
+    { id: 4, src: 'video1.mp4', title: 'Sylas Frostwing', description: 'Description 4' },
+    { id: 5, src: 'video1.mp4', title: 'Nova Starweaver', description: 'Description 5' },
+  ];
+
+  useEffect(() => {
+    if (searchQuery) {
+      const searchResults = videos.filter(video => video.title.toLowerCase().includes(searchQuery.toLowerCase()));
+      setFilteredVideos(searchResults);
+      if (searchResults.length > 0) {
+        setMainVideo(searchResults[0]);
+      }
+    } else {
+      setFilteredVideos(videos);
+    }
+  }, [searchQuery]);
+
+
+  
+  const { id } = useParams();
+  const [mainVideo, setMainVideo] = useState(videos.find(v => v.id === parseInt(id)));
+  const [filteredVideos, setFilteredVideos] = useState(videos);
+  
+
+  const updateMainVideo = (video) => {
+    setMainVideo(video);
+  };
+
+  if (!mainVideo) {
     return <div>Video not found</div>;
   }
 
@@ -22,7 +52,7 @@ const VideoDetail = ({ videos }) => {
           </Link>
           <h2 className="text-xl font-bold">Related Videos</h2>
         </div>
-        {videos.filter(v => v.id !== video.id).map((vid) => (
+        {videos.filter(v => v.id !== mainVideo.id).map((vid) => (
           <Link to={`/video/${vid.id}`} key={vid.id} className="block">
             <div className="p-2">
               <video
@@ -51,13 +81,13 @@ const VideoDetail = ({ videos }) => {
             controls
             className="object-cover"
           >
-            <source src={process.env.PUBLIC_URL + '/' + video.src} type="video/mp4" />
+            <source src={process.env.PUBLIC_URL + '/' + mainVideo.src} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
         <div className="mt-4 border p-4 w-full bg-gradient-to-t from-[#9747FF] to-white sm:border">
-          <h1 className="text-xl lg:text-2xl font-bold">{video.title}</h1>
-          <p className="mt-2 font-semibold text-lg lg:text-xl">{video.description}</p>
+          <h1 className="text-xl lg:text-2xl font-bold">{mainVideo.title}</h1>
+          <p className="mt-2 font-semibold text-lg lg:text-xl">{mainVideo.description}</p>
           <h4 className='text-lg lg:text-xl font-normal pt-6 pb-4'>
             A startup story typically recounts the journey of a new business from its inception through its early struggles, growth phases, and eventual success or challenges. It often highlights the vision and passion of the founders, the innovative ideas that sparked the venture, the hurdles faced in securing funding, building a team, developing a product or service, and gaining market traction. Startup stories can be inspirational, showcasing perseverance, creativity, and resilience in the face of uncertainty and competition, while also offering insights into the dynamics of entrepreneurship and business development.
           </h4>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Header from '../Components/Header';
 
@@ -13,9 +13,24 @@ const videos = [
   { id: 8, title: 'Reiciendis tetur', src: 'video8.mp4', description: 'Description for video 8' },
 ];
 
-const VideoDetails = () => {
+const VideoDetails = ({ searchQuery }) => {
+
+  useEffect(() => {
+    if (searchQuery) {
+      const searchResults = videos.filter(video => video.title.toLowerCase().includes(searchQuery.toLowerCase()));
+      setFilteredVideos(searchResults);
+      if (searchResults.length > 0) {
+        setMainVideo(searchResults[0]);
+      }
+    } else {
+      setFilteredVideos(videos);
+    }
+  }, [searchQuery]);
+
+
   const { id } = useParams();
   const [mainVideo, setMainVideo] = useState(videos.find(v => v.id === parseInt(id)));
+  const [filteredVideos, setFilteredVideos] = useState(videos);
   const relatedVideos = videos.filter(v => v.id !== parseInt(id)).slice(0, 4);
 
   const updateMainVideo = (video) => {
@@ -28,7 +43,6 @@ const VideoDetails = () => {
 
   return (
     <div>
-      <Header />
       <div className="bg-gray-100 py-10">
         <div className="mx-4 md:mx-16 p-4">
           <div className="flex justify-between items-center mb-4">
@@ -53,7 +67,7 @@ const VideoDetails = () => {
             {relatedVideos.map((relatedVideo) => (
               <div key={relatedVideo.id} className="flex-1 cursor-pointer" onClick={() => updateMainVideo(relatedVideo)}>
                 <Link to={`/videos/${relatedVideo.id}`}>
-                  <video controls className="w-full h-32 object-cover rounded-lg">
+                  <video controls className="w-full h-48 object-cover rounded-lg">
                     <source src={process.env.PUBLIC_URL + '/' + relatedVideo.src} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>

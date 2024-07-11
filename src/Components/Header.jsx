@@ -1,7 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({ searchQuery, setSearchQuery }) => {
+  const navigate = useNavigate();
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    navigate(`/video/${searchQuery}`);
+  };
+
+
   return (
     <header className="bg-[#032d60] text-white">
       <div className="flex justify-center px-4 py-2 sm:px-10 sm:py-4">
@@ -16,12 +29,12 @@ const Header = () => {
             <Link to='/startuppodcast' className='py-2'> <h1  className="px-2 py-1 sm:px-4 sm:py-2 rounded-full font-semibold bg-[#eaf5fe] text-black hover:bg-[#ce4d2f] hover:text-white transition-colors">StartupPodcast</h1></Link>
             <Link to='/studentcontribution' className='py-2'> <h1  className="px-2 py-1 sm:px-4 sm:py-2 rounded-full font-semibold bg-[#eaf5fe] text-black hover:bg-[#ce4d2f] hover:text-white transition-colors">Student Contribution Stories</h1></Link>
           </div>
-          <div className="search mt-4 sm:mt-0">
-            <input placeholder="Search..." type="text" className="border rounded-l-full py-1 px-2 sm:py-2 sm:px-4" />
+          <form onSubmit={handleSearchSubmit} className="search mt-4 sm:mt-0">
+            <input placeholder="Search..." type="text"  value={searchQuery} onChange={handleSearchChange} className="border rounded-l-full py-1 px-2 sm:py-2 sm:px-4" />
             <button type="submit" className="border rounded-r-full py-1 px-2 sm:py-2 sm:px-4 bg-[#ce4d2f] text-white">
               Go
             </button>
-          </div>
+          </form>
         </div>
       </nav>
     </header>

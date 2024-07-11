@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
 import Home from "./Components/Home";
 import StartupTalk from "./Components/StartupTalk";
@@ -11,6 +12,9 @@ import VideoDetails from "./Components/Stvd";
 
 
 function App() {
+  const [searchQuery, setSearchQuery] = useState('');
+
+
   const videos = [
     { id: 1, src: 'video1.mp4', title: 'Aetherius Vael', description: 'Description 1' },
     { id: 2, src: 'video1.mp4', title: 'Seraphina Drakewind', description: 'Description 2' },
@@ -31,32 +35,30 @@ function App() {
   
   return (
       <Router>
+        <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path="/video/:id" element={
             <>
-            <Header/>
-            <VideoDetail videos={videos}/>
+            <VideoDetail searchQuery={searchQuery} videos={videos}/>
             </>}
              />
           <Route path="/startupstories"  element={
               <>
-              <Header/>
-                <StudentStoryPage videos={videos} />
-                <StudentContributionPage videos={videos} />
+                <StudentStoryPage searchQuery={searchQuery} videos={videos} />
+                <StudentContributionPage searchQuery={searchQuery} videos={videos} />
               </>
             } />
           {/* <Route path="/startupstories" element={<StudentStoryPage videos={videos} />} /> */}
           {/* <Route path='/startupstories' element={<StartupStories/>} /> */}
-          <Route path="/startuptalk" element={<StartupTalk/>} />
+          <Route path="/startuptalk" searchQuery={searchQuery} element={<StartupTalk/>} />
           <Route path="/videos/:id" element={
-            <VideoDetails videoss={videoss} />} />
-          <Route path='/startuppodcast' element={<StartupPodcast/>} />
+            <VideoDetails searchQuery={searchQuery} videoss={videoss} />} />
+          <Route path='/startuppodcast' searchQuery={searchQuery} element={<StartupPodcast/>} />
           {/* <Route path='/studentcontribution' element={<StudentContributionPage/>} /> */}
           <Route path="/studentcontribution" element={
             <>
-            <Header/>
-            <StudentContributionPage videos={videos} />
+            <StudentContributionPage searchQuery={searchQuery} videos={videos} />
             </>
             } />
         </Routes>
