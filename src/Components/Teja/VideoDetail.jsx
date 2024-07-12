@@ -25,7 +25,6 @@ const VideoDetail = ({ searchQuery }) => {
     }
   }, [searchQuery]);
 
-
   
   const { id } = useParams();
   const [mainVideo, setMainVideo] = useState(videos.find(v => v.id === parseInt(id)));
