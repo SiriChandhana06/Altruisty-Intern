@@ -11,5 +11,5 @@ const Section = ({ title, videos }) => {
   );
 }
 
-export default Section;                                                                 // src/chatgpt/Section.js */}
+export default Section;                                                                
   

@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 const VideoCard = ({ video,basePath }) => {
   return (
    
-    <div className="min-w-max p-6">
+    <div className=" p-6">
       
         <Link to={`/video/${video.id}`}>
       
