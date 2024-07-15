@@ -1,6 +1,7 @@
+// src/components/VideoCarousel.js
 import React, { useRef } from 'react';
 import Slider from 'react-slick';
-import VideoCard from './VideoCard'; // Assuming VideoCard component is defined
+import VideoCard from './videoCard'; 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -11,11 +12,11 @@ const VideoCarousel = ({ videos }) => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3, // Number of slides to show at a time
+    slidesToShow: 3,
     slidesToScroll: 1,
     arrows: true,
     autoplay: true,
-    autoplaySpeed: 5000, // Autoplay interval in milliseconds
+    autoplaySpeed: 5000,
     responsive: [
       {
         breakpoint: 1024,
@@ -41,19 +42,8 @@ const VideoCarousel = ({ videos }) => {
           </div>
         ))}
       </Slider>
-      
-      {/* <button className="slick-prev" onClick={() => sliderRef.current.slickPrev()}>
-        {"<"}
-      </button>
-      <button className="slick-next" onClick={() => sliderRef.current.slickNext()}>
-        {">"}
-      </button> */}
     </div>
   );
 }
 
 export default VideoCarousel;
-
-
-
-
