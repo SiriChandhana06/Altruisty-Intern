@@ -3,7 +3,7 @@ const data = [
   {
     id: '1',
     title: 'Startup Journey: From Idea to Reality',
-    src: 'data/startup_journey.mp4'
+    src: '/video1.mp4'
   },
   {
     id: '2',
